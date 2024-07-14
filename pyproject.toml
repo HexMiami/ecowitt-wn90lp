@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "ecowitt-wn90lp"
+version = "1.0.0"
+description = "Ecowitt WN90LP (WS90 RS485 Modbus) client"
+authors = [
+	"Corey Matyas <corey@hextronics.com>"
+]
+license = "BSD-2-Clause"
+readme = "README.md"
+classifiers = [
+	"License :: OSI Approved :: BSD License",
+	"Framework :: AsyncIO",
+	"Operating System :: OS Independent",
+	"Programming Language :: Python :: 3",
+]
+
+[project.urls]
+Homepage = "https://github.com/HexMiami/ecowitt-wn90lp"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pymodbus = {extras = ["serial"], version = "^3.6.9"}
+
+[tool.poetry.group.dev.dependencies]
+pyright = "^1.1.371"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pyright]
+include = ["ecowitt_wn90lp"]
+strict = ["ecowitt_wn90lp"]
+pythonVersion = "3.12"
