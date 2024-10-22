@@ -5,7 +5,6 @@ Copyright 2024 Hex Inc | Released under BSD-2-Clause
 """
 from __future__ import annotations
 
-import asyncio
 from dataclasses import dataclass
 from enum import IntEnum
 from typing import Final, cast
@@ -27,7 +26,7 @@ class WS90Client:
             bytesize=8,
             parity='N', # 'N'one
             stopbits=1,
-            strict=False,
+            # strict=False, # TODO: works on 3.11+, not 3.9
         )
         self.slave_id: int = slave_id
 
@@ -248,7 +247,8 @@ class WS90Exception(Exception):
     pass
 
 
-@dataclass(slots=True, frozen=True, kw_only=True)
+# @dataclass(slots=True, frozen=True, kw_only=True) # TODO: Py 3.11
+@dataclass(frozen=True)
 class WS90Measurement:
     light: int
     """Light from 0 to 300,000 lux (resolution: 10 lux)"""
@@ -287,7 +287,8 @@ class WS90Measurement:
         )
 
 
-@dataclass(slots=True, frozen=True, kw_only=True)
+# @dataclass(slots=True, frozen=True, kw_only=True) # TODO: Py 3.11
+@dataclass(frozen=True)
 class WS90Reading(WS90Measurement):
     rainfall: float
     """Rainfall from 0 - 9999 mm (resolution: 0.1 mm)"""
@@ -297,15 +298,3 @@ class WS90Reading(WS90Measurement):
             super(WS90Reading, self).__str__()
             + f"Rainfall: {self.rainfall} mm\n"
         )
-
-
-async def _main() -> None:
-    client = WS90Client('/dev/ttyUSB0')
-    await client.connect()
-    print(await client.read_all())
-    client.close()
-
-
-if __name__ == "__main__":
-    loop = asyncio.new_event_loop()
-    loop.run_until_complete(_main())

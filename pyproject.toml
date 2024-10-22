@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ecowitt-wn90lp"
-version = "1.0.0"
+version = "1.1.0"
 description = "Ecowitt WN90LP (WS90 RS485 Modbus) client"
 authors = [
 	"Corey Matyas <corey@hextronics.com>"
@@ -18,7 +18,7 @@ classifiers = [
 Homepage = "https://github.com/HexMiami/ecowitt-wn90lp"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.9"
 pymodbus = {extras = ["serial"], version = "^3.6.9"}
 
 [tool.poetry.group.dev.dependencies]
